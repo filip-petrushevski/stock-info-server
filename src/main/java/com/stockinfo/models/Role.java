@@ -1,5 +1,6 @@
 package com.stockinfo.models;
 
+import com.stockinfo.models.enums.ERole;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

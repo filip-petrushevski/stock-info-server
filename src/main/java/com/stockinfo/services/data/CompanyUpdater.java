@@ -3,7 +3,6 @@ package com.stockinfo.services.data;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.stockinfo.models.Company;
@@ -16,7 +15,6 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.List;
@@ -63,7 +61,7 @@ public class CompanyUpdater implements ApplicationRunner {
                 new TypeReference<List<CompanySymbol>>() {});
 
         companySymbols.stream()
-                .map(companySymbol -> companySymbol.getSymbol())
+                .map(CompanySymbol::getSymbol)
                 .filter(s -> !companyRepository.existsById(s))
                 .forEach(s -> {
                     try {
@@ -85,9 +83,7 @@ public class CompanyUpdater implements ApplicationRunner {
                         Company company = objectMapper2.readValue(profileJsonRes.toString(), Company.class);
                         company.setSymbol(s);
                         companyRepository.saveAndFlush(company);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    } catch (InterruptedException e) {
+                    } catch (IOException | InterruptedException e) {
                         e.printStackTrace();
                     }
                 });

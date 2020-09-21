@@ -19,7 +19,6 @@ import java.net.URLConnection;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
-import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -42,11 +41,9 @@ public class OHLCUpdater implements ApplicationRunner {
     }
 
     @Override
-    public void run(ApplicationArguments args) throws Exception {
+    public void run(ApplicationArguments args) {
         ScheduledExecutorService ses = Executors.newSingleThreadScheduledExecutor();
-        ses.scheduleAtFixedRate(() -> {
-            updateOHLC();
-        }, 3, 24, TimeUnit.HOURS); // DELAY SHOULD BE 3
+        ses.scheduleAtFixedRate(this::updateOHLC, 3, 24, TimeUnit.HOURS); // DELAY SHOULD BE 3
     }
 
     private void updateOHLC() {
@@ -60,7 +57,7 @@ public class OHLCUpdater implements ApplicationRunner {
                         Thread.sleep(1200);
                         URL url = new URL(FINNHUB_API_CANDLE_URL + "symbol=" + s + fromAndTo +
                                 "&token=" + FINNHUB_API_KEY);
-                        URLConnection req = null;
+                        URLConnection req;
                         req = url.openConnection();
                         req.connect();
                         JsonObject jsonRes = JsonParser.parseReader(new InputStreamReader(req.getInputStream()))
@@ -85,9 +82,7 @@ public class OHLCUpdater implements ApplicationRunner {
                                     c.get(i).getAsDouble(),
                                     v.get(i).getAsLong()));
                         }
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    } catch (InterruptedException e) {
+                    } catch (IOException | InterruptedException e) {
                         e.printStackTrace();
                     }
                 });

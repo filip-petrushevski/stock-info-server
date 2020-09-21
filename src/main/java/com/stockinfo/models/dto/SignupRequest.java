@@ -1,4 +1,4 @@
-package com.stockinfo.payload.request;
+package com.stockinfo.models.dto;
 
 import lombok.Data;
 

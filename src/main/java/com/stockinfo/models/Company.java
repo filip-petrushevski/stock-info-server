@@ -1,8 +1,6 @@
 package com.stockinfo.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -41,12 +39,9 @@ public class Company {
     private String logo;
     @Size(max = 256)
     private String finnhubIndustry;
-    @JsonBackReference
+    @JsonIgnore
     @ManyToMany(mappedBy = "companies", fetch = FetchType.LAZY)
     private Set<StockUser> users;
-    @JsonIgnore
-    @OneToMany(mappedBy = "company", fetch = FetchType.LAZY)
-    private Set<OHLC> ohlcSet;
 
     @Override
     public boolean equals(Object o) {
@@ -65,9 +60,7 @@ public class Company {
                 Objects.equals(ticker, company.ticker) &&
                 Objects.equals(weburl, company.weburl) &&
                 Objects.equals(logo, company.logo) &&
-                Objects.equals(finnhubIndustry, company.finnhubIndustry) &&
-                Objects.equals(users, company.users) &&
-                Objects.equals(ohlcSet, company.ohlcSet);
+                Objects.equals(finnhubIndustry, company.finnhubIndustry);
     }
 
     @Override

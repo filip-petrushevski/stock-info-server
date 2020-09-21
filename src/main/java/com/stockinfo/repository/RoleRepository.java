@@ -1,6 +1,6 @@
 package com.stockinfo.repository;
 
-import com.stockinfo.models.ERole;
+import com.stockinfo.models.enums.ERole;
 import com.stockinfo.models.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 

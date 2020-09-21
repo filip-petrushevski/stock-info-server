@@ -1,6 +1,6 @@
 package com.stockinfo.services.data;
 
-import com.stockinfo.models.ERole;
+import com.stockinfo.models.enums.ERole;
 import com.stockinfo.models.Role;
 import com.stockinfo.models.StockUser;
 import com.stockinfo.repository.RoleRepository;

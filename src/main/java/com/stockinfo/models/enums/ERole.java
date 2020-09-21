@@ -1,4 +1,4 @@
-package com.stockinfo.models;
+package com.stockinfo.models.enums;
 
 public enum ERole {
     ROLE_USER,
