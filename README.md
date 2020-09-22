@@ -3,6 +3,7 @@
 * [Description](#description)
 * [Technologies used](#technologies-used)
 * [Setup](#setup)
+* [Demo](#demo)
 ## Description
 Stock-info is a school project for the subject Web programming on the Faculty of Computer Science and Engineering - Skopje. The project is a web application about news and information. This is the server-side application.  
 Filip Petrushevski  
@@ -20,3 +21,5 @@ The websites of the external API are:
 https://finnhub.io/  
 https://newsapi.org/
 - After these steps you are ready to install the maven dependencies and run the application with any GUI that supports Java Spring Boot application, or with `mvn spring-boot:run` command run in the root directory if you have maven installed.
+## Demo
+![Farmers Market Finder Demo](demo/demo.gif)
